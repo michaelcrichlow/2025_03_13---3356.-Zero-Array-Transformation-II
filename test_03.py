@@ -61,6 +61,7 @@ def minZeroArray(nums: list[int], queries: list[list[int]]) -> int:
 
 
 # Another solution that works and passes all tests.
+# This is the solution CoPilot gave. I haven't studies this one yet.
 def minZeroArray(self, nums: List[int], queries: List[List[int]]) -> int:
     n = len(nums)
     diff = [0] * (n + 1)
