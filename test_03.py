@@ -59,7 +59,32 @@ def minZeroArray(nums: list[int], queries: list[list[int]]) -> int:
     
     return left
 
+# Another solution that works and passes all tests.
+def minZeroArray(self, nums: List[int], queries: List[List[int]]) -> int:
+    n = len(nums)
+    diff = [0] * (n + 1)
+    sum_val = 0
+    pos = 0
 
+    for i in range(n):
+        while sum_val + diff[i] < nums[i]:
+            if pos == len(queries):  # All queries exhausted
+                return -1
+
+            start, end, val = queries[pos]
+            pos += 1
+
+            if end < i:  # Skip irrelevant updates
+                continue
+
+            # Apply range update in O(1)
+            diff[max(start, i)] += val
+            if end + 1 < n:
+                diff[end + 1] -= val
+
+        sum_val += diff[i]
+
+    return pos
 
 def main() -> None:
     print(minZeroArray(nums = [2,0,2], queries = [[0,2,1],[0,2,1],[1,1,3]])) # 2
