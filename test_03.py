@@ -59,6 +59,7 @@ def minZeroArray(nums: list[int], queries: list[list[int]]) -> int:
     
     return left
 
+
 # Another solution that works and passes all tests.
 def minZeroArray(self, nums: List[int], queries: List[List[int]]) -> int:
     n = len(nums)
@@ -86,11 +87,11 @@ def minZeroArray(self, nums: List[int], queries: List[List[int]]) -> int:
 
     return pos
 
+
 def main() -> None:
     print(minZeroArray(nums = [2,0,2], queries = [[0,2,1],[0,2,1],[1,1,3]])) # 2
     print(minZeroArray(nums = [4,3,2,1], queries = [[1,3,2],[0,2,1]])) # -1
     print(minZeroArray(nums = [0], queries = [[0,0,2],[0,0,4],[0,0,4],[0,0,3],[0,0,5]])) # testcase 619 / 627
-
 
 
 if __name__ == '__main__':
