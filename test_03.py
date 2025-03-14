@@ -88,6 +88,65 @@ def minZeroArray(self, nums: List[int], queries: List[List[int]]) -> int:
     return pos
 
 
+# another solution taht I came up with. Just practicing it to make sure I understand.
+# 1.) All Testcases passed!
+# 2.) Solution Accepted!
+def minZeroArray(nums: list[int], queries: list[list[int]]) -> int:
+    def nums_is_all_zero(n: int):
+        diff = [0] * len(nums)
+
+        for start, end, inc in queries[:n + 1]:
+            diff[start] += inc
+            if end + 1 < len(nums):
+                diff[end + 1] -= inc 
+
+        # prefix_sum(diff)
+        for i in range(len(diff) - 1):
+            diff[i + 1] += diff[i]
+
+        for i in range(len(diff)):
+            val = nums[i] - diff[i]
+            if val <= 0:
+                pass
+            else:
+                return False
+        
+        return True
+    
+    if sum(nums) == 0:
+        return 0
+    
+    N = len(nums)
+    Q = len(queries)
+
+    left = 0
+    right = Q - 1
+    ans = -1
+    first_pass = True
+
+    while left <= right:
+        middle = (left + right) // 2
+        value = queries[middle]
+
+        if nums_is_all_zero(middle):
+            ans = middle + 1
+            right = middle - 1
+            if left == right:
+                if first_pass:
+                    first_pass = False
+                else:
+                    break
+        else:
+            left = middle + 1
+            if left == right:
+                if first_pass:
+                    first_pass = False
+                else:
+                    break 
+    
+    return ans
+
+
 def main() -> None:
     print(minZeroArray(nums = [2,0,2], queries = [[0,2,1],[0,2,1],[1,1,3]])) # 2
     print(minZeroArray(nums = [4,3,2,1], queries = [[1,3,2],[0,2,1]])) # -1
